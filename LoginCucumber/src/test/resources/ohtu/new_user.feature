@@ -15,6 +15,11 @@ Feature: A new user account can be created if a proper unused username and passw
     When  username "as" and password "mattimatt1" are entered
     Then  system will respond with "new user not registered"
 
+  Scenario: creation fails with invalid username and valid password
+    Given command new is selected
+    When  username "eero1" and password "salainen1" are entered
+    Then  system will respond with "new user not registered"
+
   Scenario: creation fails with valid username and too short password
     Given command new is selected
     When  username "asd" and password "toosho1" are entered
