@@ -70,14 +70,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", Player.class.getSimpleName() + "[", "]")
-                .add("name='" + name + "'")
-                .add("goals=" + goals)
-                .add("assists=" + assists)
-                .add("penalties=" + penalties)
-                .add("team='" + team + "'")
-                .add("nationality='" + nationality + "'")
-                .add("birthdate='" + birthdate + "'")
+        return new StringJoiner("\t").add(name).add(team).add(goals + " + " + assists + " = " + (goals+assists))
                 .toString();
     }
 }
