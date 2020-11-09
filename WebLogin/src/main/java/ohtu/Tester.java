@@ -5,31 +5,65 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.nio.charset.Charset;
+import java.util.Random;
+
 public class Tester {
 
     public static void main(String[] args) {
         WebDriver driver = new ChromeDriver();
 
+        byte[] array = new byte[8];
+        new Random().nextBytes(array);
+        String username = new String(array, Charset.defaultCharset());
+        String password = "akkep";
+
         driver.get("http://localhost:4567");
         
         sleep(2);
         
-        WebElement element = driver.findElement(By.linkText("login"));
+        WebElement element = driver.findElement(By.linkText("register new user"));
         element.click();
 
         sleep(2);
 
         element = driver.findElement(By.name("username"));
-        element.sendKeys("pekka");
+        element.sendKeys(username);
         element = driver.findElement(By.name("password"));
-        element.sendKeys("akkep");
-        element = driver.findElement(By.name("login"));
+        element.sendKeys(password);
+        element = driver.findElement(By.name("passwordConfirmation"));
+        element.sendKeys(password);
+        element = driver.findElement(By.name("signup"));
         
         sleep(2);
         element.submit();
 
-        sleep(3);
-        
+        sleep(2);
+
+        element = driver.findElement(By.partialLinkText("continue"));
+        element.click();
+
+        sleep(2);
+
+        element = driver.findElement(By.linkText("logout"));
+        element.click();
+
+        sleep(2);
+
+        element = driver.findElement(By.linkText("login"));
+        element.click();
+
+        element = driver.findElement(By.name("username"));
+        element.sendKeys(username);
+        element = driver.findElement(By.name("password"));
+        element.sendKeys(password);
+        element = driver.findElement(By.name("login"));
+
+        sleep(2);
+        element.submit();
+
+        sleep(2);
+
         driver.quit();
     }
     
