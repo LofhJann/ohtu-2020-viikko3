@@ -7,6 +7,8 @@ import io.cucumber.java.en.Then;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.*;
+
+import ohtu.domain.User;
 import ohtu.io.*;
 import ohtu.data_access.*;
 import ohtu.services.*;
@@ -43,6 +45,26 @@ public class Stepdefs {
     @Then("system will respond with {string}")
     public void systemWillRespondWith(String expectedOutput) {
         assertTrue(io.getPrints().contains(expectedOutput));
-    }    
+    }
 
+    @Given("command new is selected")
+    public void commandNewIsSelected() {
+        inputLines.add("new");
+    }
+
+    @Given("user {string} with password {string} is created")
+    public void userWithPasswordIsCreated(String username, String password) {
+        inputLines.add("new");
+        inputLines.add(username);
+        inputLines.add(password);
+
+
+        inputLines.add("login");
+        inputLines.add(username);
+        inputLines.add(password);
+
+        io = new StubIO(inputLines);
+        app = new App(io, auth);
+        app.run();
+    }
 }
